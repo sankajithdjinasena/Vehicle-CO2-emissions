@@ -74,3 +74,5 @@ def predict():
         return render_template('index.html', prediction_result=f"An unexpected error occurred: {e}", 
                                 form_data=request.form.to_dict(), features=feature_lists)
 
+if __name__ == '__main__':
+    app.run(debug=True)
