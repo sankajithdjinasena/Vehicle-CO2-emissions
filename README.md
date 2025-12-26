@@ -58,7 +58,18 @@ Uses: - Engine Size
     ├── co2.csv
     ├── script.ipynb
     ├── README.md
-    └── requirements.txt
+    ├── best_model.pkl
+    ├── requirements.txt
+    ├── Figures
+    └── App
+        ├── app.py
+        ├── best_model.pkl
+        ├── co2.csv
+        ├── feature_list.pkl
+        ├── model_prep_for_flask.py
+        ├── Model.png
+        └── templates
+            └── index.html
 
 ## 📝 How to Run
 
