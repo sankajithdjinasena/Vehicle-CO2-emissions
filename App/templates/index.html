@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CO2 Emissions Predictor</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e1e8ed;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4CAF50;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        /* Warning Styling */
+        .warning {
+            color: #e74c3c;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffeaea;
+            border-left: 4px solid #e74c3c;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        /* Result Styling */
+        .result {
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e6f7ff 0%, #d1ecff 100%);
+            border: 1px solid #b3e0ff;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #0066cc;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.1);
+        }
+        
+        /* Form Styling */
+        form {
+            margin-top: 20px;
+        }
+        
+        fieldset {
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            background: #f9fbfd;
+        }
+        
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 0 15px;
+            background: white;
+            border-radius: 4px;
+            border: 2px solid #4CAF50;
+        }
+        
+        /* Label Styling */
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+        
+        /* Input and Select Styling */
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-top: 5px;
+            border: 2px solid #dce4ec;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
+        /* Submit Button */
+        input[type="submit"] {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input[type="submit"]:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            fieldset {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .result {
+                font-size: 1.1em;
+                padding: 15px;
+            }
+        }
+        
+        /* Form Group Animation */
+        .form-group {
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Select dropdown styling */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 45px;
+        }
+        
+        /* Number input styling */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 1;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CO2 Emissions Predictor</h1>
+        <p>Select the vehicle details and enter numerical data to predict the CO2 Emissions (g/km).</p>
+        <p class="warning">**NOTE:** Using dropdowns for high-cardinality features like "Model" may result in a very long list and slow page loading.</p>
+
+        {% if prediction_result %}
+            <div class="result">{{ prediction_result }}</div>
+        {% endif %}
+
+        <form action="/predict" method="post">
+            <fieldset>
+                <legend>Vehicle Identification</legend>
+                
+                <div class="form-group">
+                    <label for="Brand">Brand:</label>
+                    <select id="Brand" name="Brand" required>
+                        {% for option in features.Brand %}
+                            <option value="{{ option }}"
+                                {% if form_data and form_data.get('Brand') == option %}selected{% endif %}>
+                                {{ option }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Model">Model:</label>
+                    <select id="Model" name="Model" required>
+                        {% for option in features.Model %}
+                            <option value="{{ option }}"
+                                {% if form_data and form_data.get('Model') == option %}selected{% endif %}>
+                                {{ option }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Vehicle Class">Vehicle Class:</label>
+                    <select id="Vehicle Class" name="Vehicle Class" required>
+                        {% for option in features['Vehicle Class'] %}
+                            <option value="{{ option }}"
+                                {% if form_data and form_data.get('Vehicle Class') == option %}selected{% endif %}>
+                                {{ option }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Transmission">Transmission:</label>
+                    <select id="Transmission" name="Transmission" required>
+                        {% for option in features.Transmission %}
+                            <option value="{{ option }}"
+                                {% if form_data and form_data.get('Transmission') == option %}selected{% endif %}>
+                                {{ option }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Fuel Type">Fuel Type:</label>
+                    <select id="Fuel Type" name="Fuel Type" required>
+                        {% for option in features['Fuel Type'] %}
+                            <option value="{{ option }}"
+                                {% if form_data and form_data.get('Fuel Type') == option %}selected{% endif %}>
+                                {{ option }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Engine and Fuel Consumption Data</legend>
+                
+                <div class="form-group">
+                    <label for="Engine Size(L)">Engine Size (L):</label>
+                    <input type="number" step="0.1" min="0.1" max="10" id="Engine Size(L)" name="Engine Size(L)" value="{{ form_data['Engine Size(L)'] if form_data and 'Engine Size(L)' in form_data else '2.0' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Cylinders">Cylinders:</label>
+                    <input type="number" step="1" min="1" max="16" id="Cylinders" name="Cylinders" value="{{ form_data.Cylinders if form_data and 'Cylinders' in form_data else '4' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Fuel Consumption City (L/100 km)">Fuel Consumption City (L/100 km):</label>
+                    <input type="number" step="0.1" min="1" max="50" id="Fuel Consumption City (L/100 km)" name="Fuel Consumption City (L/100 km)" value="{{ form_data['Fuel Consumption City (L/100 km)'] if form_data and 'Fuel Consumption City (L/100 km)' in form_data else '9.9' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Fuel Consumption Hwy (L/100 km)">Fuel Consumption Hwy (L/100 km):</label>
+                    <input type="number" step="0.1" min="1" max="50" id="Fuel Consumption Hwy (L/100 km)" name="Fuel Consumption Hwy (L/100 km)" value="{{ form_data['Fuel Consumption Hwy (L/100 km)'] if form_data and 'Fuel Consumption Hwy (L/100 km)' in form_data else '6.7' }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="Fuel Consumption Comb (L/100 km)">Fuel Consumption Comb (L/100 km):</label>
+                    <input type="number" step="0.1" min="1" max="50" id="Fuel Consumption Comb (L/100 km)" name="Fuel Consumption Comb (L/100 km)" value="{{ form_data['Fuel Consumption Comb (L/100 km)'] if form_data and 'Fuel Consumption Comb (L/100 km)' in form_data else '8.5' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Fuel Consumption Comb (mpg)">Fuel Consumption Comb (mpg):</label>
+                    <input type="number" step="1" min="1" max="100" id="Fuel Consumption Comb (mpg)" name="Fuel Consumption Comb (mpg)" value="{{ form_data['Fuel Consumption Comb (mpg)'] if form_data and 'Fuel Consumption Comb (mpg)' in form_data else '33' }}" required>
+                </div>
+            </fieldset>
+
+            <input type="submit" value="Predict CO2 Emissions">
+        </form>
+    </div>
+</body>
+</html>

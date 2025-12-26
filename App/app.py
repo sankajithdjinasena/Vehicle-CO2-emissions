@@ -33,7 +33,7 @@ FEATURE_NAMES = [
 def home():
     """Renders the main form for input, passing categorical options."""
     # Pass the feature lists to the template
-    return render_template('index.html', features=feature_lists)
+    return render_template('index.html', features=feature_lists, form_data={})
 
 @app.route('/predict', methods=['POST'])
 def predict():

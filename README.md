@@ -12,7 +12,7 @@ regression models can be used to predict CO₂ output.
 
 The dataset used in this project is available on Kaggle:
 
-Vehicle CO2 Emissions Dataset\
+Vehicle CO2 Emissions Dataset
 https://www.kaggle.com/datasets/brsahan/vehicle-co2-emissions-dataset/
 
 It includes key features such as: - Brand - Vehicle Type - Engine Size
@@ -21,24 +21,23 @@ It includes key features such as: - Brand - Vehicle Type - Engine Size
 
 ## 🎯 Project Objectives
 
--   Analyze relationships between vehicle specs and CO₂ emissions\
--   Perform Exploratory Data Analysis (EDA)\
--   Build Simple and Multiple Linear Regression models\
+-   Analyze relationships between vehicle specs and CO₂ emissions
+-   Perform Exploratory Data Analysis (EDA)
+-   Build Simple and Multiple Linear Regression models
 -   Visualize trends affecting environmental impact
 
 ## 🛠️ Technologies Used
 
--   Python, Pandas, NumPy\
--   Matplotlib, Seaborn\
--   Scikit-learn\
--   Jupyter Notebook / Colab
+-   Python, Pandas, NumPy
+-   Matplotlib, Seaborn
+-   Scikit-learn
+-   Jupyter Notebook
 
 ## 📊 Exploratory Data Analysis
 
-Includes: - Data cleaning\
-- Missing value checks\
-- Distribution plots\
-- Correlation heatmap\
+Includes: - Data cleaning
+- Missing value checks
+- Distribution plots
 - Boxplots & scatter plots
 
 ## 🤖 Machine Learning Models
@@ -49,9 +48,9 @@ Predicts CO₂ emissions using Engine Size (L).
 
 ### Multiple Linear Regression (MLR)
 
-Uses: - Engine Size\
-- Cylinders\
-- Fuel Consumption\
+Uses: - Engine Size
+- Cylinders
+- Fuel Consumption
 - Encoded Transmission & Fuel Type
 
 ## 📦 Repository Structure
@@ -63,9 +62,9 @@ Uses: - Engine Size\
 
 ## 📝 How to Run
 
-1.  Clone the repository\
-2.  Install dependencies\
-3.  Add dataset into **co2.csv**\
+1.  Clone the repository
+2.  Install dependencies
+3.  Add dataset into **co2.csv**
 4.  Run the notebook or scripts
 
 ## 🙌 Acknowledgements
